@@ -1,23 +1,49 @@
-<title>Library Management System</title>
+<title>Bibliothèque</title>
 {% extends 'base.html' %}
 
 <body>
 {% block content %}
-<h1>Library Management System</h1>
+<h1>Système de gestion de bibliothèque</h1>
+<hr>
 <div id="message">
     {{message}}
 </div>
 {%load static%}
-<img src="{%static 'images/Quotes/Quote-5.png' %}">
+<!-- <img src="{%static 'images/Quotes/Quote-4.png' %}" >  -->
 <!-- <input type="text" value="{{choosen_img}}"> -->
-
+<h3>Collection: </h3>
+    <p>Le fonds documentaire de la bibliothèque est à la fois pluridisciplinaire et spécialisé dans les nouvelles technologies de
+    l'information et de la communication sur différents supports (livres, encyclopédies, périodiques, cartes topographiques, 
+    disquettes, CD ROM, cassettes audio et vidéo …etc.). </p>
+    
+    <p>Il met à la disposition des utilisateurs un ensemble de produits et services couvrant les domaines suivants : </p>
+    <ul>
+        <li>Informatique et Télécommunications "IT",</li>
+        <li>Électronique "E",</li>
+        <li>Mathématiques "M",</li>
+        <li>Les sciences de l'ingénieur "SI",</li>
+        <li>Management, Gestion, Marketing et Finance "MGF",</li>
+        <li>Culture générale et loisirs (romans, ...) "CG".</li>
+    </ul>
+    
 
 <style>
+    h1 {
+        text-align: center; 
+        color : blue;
+    }
+    hr {
+        width: 70%;
+        color: #000;
+    }
     img{
         height:70%;
         width:auto;
         margin: 2%;
         border-radius:3em;
+    }
+    p{
+        
     }
 </style>
 

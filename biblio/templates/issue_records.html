@@ -1,44 +1,48 @@
-<title> Issue Records </title>
+<title> Liste des emprunts </title>
 {% extends 'base.html' %}
 
 <body>
 {% block content %}
 <table class="table table-striped">
 <tr>
-    <th>Student name </th>
-    <th>Book ID </th>
-    <th>Issue Date </th>
-    <th>Due Date</th>
-    <th>Remarks on Issuing</th>
-    <th>Remarks on Return</th>
-    <th>Returned</th>
-    <th>Actions</th>
+    <th>Nom d'étudiant </th>
+    <th>Livre </th>
+    <th>Date d'emprunt </th>
+    <th>Date de retour</th>
+    <th>Remarque sur l'emprunt </th>
+    <th>Remarque sur le retour</th>
+    <th>Actions </th>
 </tr>
     {%for i in issue%}
     <tr>
         <td>{{i.student}}</td>
-        <td>{{i.book_instance.id}}</td>
+        <td>{{i.book_instance.book}}</td>
         <td>{{i.issue_date}}</td>
         <td>{{i.due_date}}</td>
         <td>{{i.remarks_on_issue}}</td>
         <td>{{i.remarks_on_return}}</td>
         <td>
-            {%if i.book_instance.Is_borrowed %}
-            <span><i class="fa fa-times-circle" style="color:rgb(128, 28, 0)"></i></span>
-            <td>
-                <a href="return_book/{{i.id}}"><i class="fa fa-arrow-alt-circle-right"></i><i class="fa fa-book"></i></a>|
-                <a href="edit_issued/{{i.id}}"><i class="fa fa-edit"></i> </a>
-            </td>
-            {%else%}
-            <span><i class="fa fa-check-circle" style="color:green"></i></span>
-            <td><a href="edit_issued/{{i.id}}"><i class="fa fa-edit"></i> </a> | <a href="delete_issued/{{i.id}}"><i class="fa fa-trash-alt"></i></a></td>
-            {%endif%}
-        </td>
-
-        
+            <a href="{% url 'edit_issued' i.id %}" id="return_button_{{ i.id }}" onclick="return handleReturnButtonClick('{{ i.id }}')">Retourner</a>
+        </td>        
         
     </tr> {% endfor %}
 </table>
+
+<script>
+    function handleReturnButtonClick(issueId) {
+        // Mettre à jour le texte du bouton
+        var returnButton = document.getElementById('return_button_' + issueId);
+        returnButton.textContent = 'Livre retourné';
+
+        // Mettre à jour la valeur de la cellule <td>
+        var valableCell = document.getElementById('valable_' + issueId);
+        valableCell.textContent = 'Oui';
+
+        // Optionnel : Ajouter une classe CSS pour styliser le texte
+        returnButton.classList.add('returned');
+    }
+</script>
+
 
 {% endblock %}
 </body>

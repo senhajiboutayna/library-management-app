@@ -1,10 +1,10 @@
-<title>Books</title>
+<title>Liste des Livres/Documents</title>
 {% extends 'base.html' %}
 
 <body>
 {% block content %}
 <div class="search">
-    <input type="text" class="form-control" id="books_search_input" name="book_name" placeholder="Search a book" onkeyup="search_books()">
+    <input type="text" class="form-control" id="books_search_input" name="book_name" placeholder="Rechercher un Livre/Document" onkeyup="search_books()">
     <!-- <br> -->
     <div id="book_searched">
         <label>Search Results</label>
@@ -13,35 +13,31 @@
 
 <table class="table table-striped">
 <tr>
-    <th>Book ID</th>
-    <th>Book title </th>
-    <th>Book author </th>
-    <th>Book pages </th>
-    <th>book Number </th>
-    <th>Is Available</th>
-    <th>Actions</th>
+    <th>ID </th>
+    <th>Titre </th>
+    <th>Auteur </th>
+    <th>Nombre de pages </th>
+    <th>Valable </th>
+    <th>Actions </th>
 </tr>
     {%for book in books%}
     <tr class="book_row">
     <td >{{book.id}}</td>
     <td class="title">{{book.book.book_title}}</td>
     <td>{{book.book.book_author}}</td>
-    <td>{{book.book.book_pages}}</td>
-    <td >{{book.book_number}}</td>
+    <td>{{book.book.book_pages}}</td>  
     <td>
-        {%if  book.Is_borrowed %}
-        <span><i class="fa fa-times-circle" style="color:rgb(128, 28, 0)"></i></span>
-        <td>
-            <a href="edit/book/{{book.id}}"><i class="fa fa-edit"></i></a>
-            </td>
-        {%else%}
-        <span><i class="fa fa-check-circle" style="color:green"></i></span>
-        <td><a href="edit/book/{{book.id}}"><i class="fa fa-edit"></i></a> | <a
-            href="delete/book/{{book.id}}"><i class="fa fa-trash-alt"></i></a></td>
-        {%endif%}
+        {% if book.Is_borrowed %}
+            <span><i class="fa fa-times-circle" style="color:rgb(128, 28, 0)"></i>Non</span>
+        {% else %}
+            <span><i class="fa fa-check-circle" style="color:green"></i>Oui</span>
+        {% endif %}
     </td>
-
-    </tr> {% endfor %}
+    <td>
+        <a href="{% url 'delete_book' book.id %}">Supprimer</a> 
+    </td>    
+    </tr> 
+    {% endfor %}
 </table>
 
 <script type="text/javascript">

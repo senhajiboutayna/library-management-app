@@ -1,22 +1,64 @@
-<title>Add New Student</title>
+<title>Gestion des étudiants</title>
 {% extends 'base.html' %}
 
 <body>
     
 {% block content %}
-<div class="form">
-<form method="POST" action="add_new_student" >
-    {% csrf_token %}
-    <label class="label-default">Student Details</label><br>
-    <label>Roll Number:</label><br><div>{{form.roll_number}}</div>
-    <label>Student Name:</label><br> <div> {{form.fullname}}</div>
-    <label>Student Address:</label><br> <div> {{form.address}}</div>
-    <label>Student Study Program:</label><br> <div>{{form.program}}</div><br>
 
-    <label>Valid Email:</label><br> <div>{{form.Email}}</div>
-    <br> <button type="submit" class="btn btn-success">Add Student</button>
-</form>
+<div class="tablinks">
+    <button onclick="NewStudent()" class="link" name="new_student">Nouveau étudiant</button>
+    <button onclick="EditStudent()" class="link" name="edit_student">modifier les données d'un étudiant</button>
 </div>
+
+
+<div id="new_student" style="display: none;" >
+    <div class="form">
+        <form method="POST" action="/add_new_student" >
+            {% csrf_token %}
+            <label class="label-default">ajoutez un nouveau étudiant : </label><br><br>
+            <label>Matricule N°:</label><br><div>{{form.roll_number}}</div>
+            <label>Nom :</label><br> <div> {{form.fullname}}</div>
+            <label>Niveau :</label><br> <div> {{form.address}}</div>
+            <label>Filière :</label><br> <div>{{form.program}}</div><br>
+            <label>Adresse Email :</label><br> <div>{{form.Email}}</div>
+            <br> <button type="submit" class="btn btn-success">Valider </button>
+        </form>
+    </div>
+</div>
+
+<div id="edit_student" style="display: none;">
+    <div class="form">
+        <form method="POST"  action=""  id="edit_student_data" >
+            {% csrf_token %}
+            <label class="label-default">Modifier les données d'un étudiant :</label><br><br>
+            <label>Matricule N°:</label><br>
+            {{student}}
+            <input type="text" name="roll_number" value={{student.roll_number}}><br>
+            <label>Nom :</label><br>
+            <input type="text" name="student_name" value={{student.fullname}}><br>
+            <label>Niveau :</label><br> 
+            <input type="text" name="address" value={{student.address}}><br>
+            <label>Filière :</label><br> 
+            <input type="text" name="program" value={{student.program}}><br>
+            <label>Adresse Email:</label><br> 
+            <input type="email" name="email" value="{{student.Email}}"><br> 
+            <br> <button type="submit" class="btn btn-success">Valider </button>
+        </form>
+    </div>
+</div>
+
+<script>
+    function NewStudent() {
+        var newStudentForm = document.getElementById("new_student");
+        newStudentForm.style.display = "block";
+    }
+
+    function EditStudent() {
+        var editStudentForm = document.getElementById("edit_student");
+        editStudentForm.style.display = "block";
+    }
+</script>
+
 {% endblock %}
 
 </body>

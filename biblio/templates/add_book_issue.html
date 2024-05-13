@@ -1,4 +1,4 @@
-<title>Add Book Issue</title>
+<title>Ajouter les emprunts de Livres/Documents</title>
 {% extends 'base.html' %}
 
 <body>
@@ -6,10 +6,10 @@
 
 <form method="POST" action="add_book_issue" class="form-inline">
     {% csrf_token %}
-    <label>Student Details(Name)</label><br>
+    <label>étudiant (Nom/Matricule N°)</label><br>
     <div id="student_selection">
         <div>{{form.student}}</div>
-            <div><input type="text" placeholder="Quick Student Search" id="quick" onkeyup="Quick_search()">
+            <div><input type="text" placeholder="rechercher" id="quick" onkeyup="Quick_search()">
                 <div id="quick_student_search_view"></div>
             </div>
     </div>
@@ -17,9 +17,9 @@
     <br>
     <hr>
     <div class="book_selection">
-        <label>Book Details(Name/UUID)</label>
+        <label>Livre/Document(Titre/ID)</label>
         <br>
-        <div><input type="text" placeholder="Quick Book Search" id="quick_book_search" onkeyup="Quick_book_search()">
+        <div><input type="text" placeholder="Rechercher" id="quick_book_search" onkeyup="Quick_book_search()">
             <div id="quick_book_search_view"></div>
         </div>
         <select name="book_instance" required id="id_book_instance">
@@ -30,9 +30,9 @@
         </select>
     </div>
 <hr>
-    <label>Remarks</label><br> <div> {{form.remarks_on_issue}}</div>
+    <label>Remarques</label><br> <div> {{form.remarks_on_issue}}</div>
     <br> 
-    <button type="submit" class="btn btn-success">Issue Book</button>
+    <button type="submit" class="btn btn-success">Valider l'emprunt</button>
 
 </form>
 
@@ -62,15 +62,6 @@
             else{
                 view.style.display="none";
             }
-        }
-    }
-    function get_clicked_value(clicked){
-        var items = document.getElementById('id_student');
-        for(i=1;i<items.children.length.valueOf();i++){
-            var item=items.children[i];
-                if (item.innerHTML == clicked ) {
-                    return item.getAttribute("value");
-                }
         }
     }
 

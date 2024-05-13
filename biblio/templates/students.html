@@ -1,4 +1,4 @@
-<title>Student</title>
+<title>Liste des étudiants</title>
 {% extends 'base.html' %}
 
 <body>
@@ -7,7 +7,7 @@
     {{message}}
 </div>
 <div class="search">
-    <input type="text" class="form-control" id="student_search_input" name="student_name" placeholder="Search student" onchange="search_student()">
+    <input type="text" class="form-control" id="student_search_input" name="student_name" placeholder="Rechercher un étudiant" onchange="search_student()">
     <!-- <br> -->
     <div id="view_searched">
         <label>Search Results</label>
@@ -15,11 +15,11 @@
 </div>
 <table class="table table-striped">
 <tr>
-    <th>Student Roll no </th>
-    <th>Student Name </th>
-    <th>Student Address </th>
-    <th>Student Study Program </th>
-    <th>Student Email</th>
+    <th>Matricule N° </th>
+    <th>Nom </th>
+    <th>Niveau </th>
+    <th>Filière </th>
+    <th>Adresse Email</th>
     <th>Actions</th>
 </tr>
     {%for student in students%}
@@ -29,9 +29,11 @@
         <td>{{student.address}}</td>
         <td>{{student.program}}</td>
         <td>{{student.Email}}</td>
-        <td><a href="edit/student/{{student.roll_number}}"><i class="fa fa-edit"></i></a> | <a
-        href="delete/student/{{student.roll_number}}"><i class="fa fa-trash-alt"></i></a></td>
-    </tr> {% endfor %}
+        <td>
+            <a href="{% url 'delete_student' student.roll_number %}">Supprimer</a>
+        </td>
+    </tr> 
+    {% endfor %}
 </table>
 
 <script type="text/javascript">

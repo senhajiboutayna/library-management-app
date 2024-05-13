@@ -12,6 +12,10 @@ class Book(models.Model):
     def __str__(self):
         return self.book_title
     
+    def delete_book(self):
+        # Supprimer le livre de la base de données
+        self.delete()
+    
 class Students(models.Model):
     roll_number = models.CharField(max_length=100,unique=True)
     fullname = models.CharField(max_length=100)
@@ -20,6 +24,10 @@ class Students(models.Model):
     Email=models.EmailField(max_length=100,help_text="Student e-mail")
     def __str__(self):
         return self.fullname
+    
+    def delete_student(self):
+        # Supprimer l'étudiant de la base de données
+        self.delete()
     
 class BookInstance(models.Model):
     id=models.UUIDField(primary_key=True,default=uuid.uuid4,help_text="Book unique id across the Library")  #identifiant unique pour chaque instance de livre
@@ -41,9 +49,9 @@ class Book_Issue(models.Model):
     due_date = models.DateTimeField(default=get_returndate(),help_text="Date the book is due to")   #enregistrer la date d'échéance de retour du livre
     date_returned=models.DateField(null=True, blank=True,help_text="Date the book is returned")   #la date de retour réelle du livre
     # enregistrer les remarques sur l'état du livre lors de l'emprunt
-    remarks_on_issue = models.CharField(max_length=100, default="Book in good condition", help_text="Book remarks/condition during issue")
+    remarks_on_issue = models.CharField(max_length=100, default="EN bonne état", help_text="Book remarks/condition during issue")
     # enregistrer les remarques sur l'état du livre lors du retour
-    remarks_on_return = models.CharField(max_length=100, default="Book in good condition", help_text="Book remarks/condition during return")
+    remarks_on_return = models.CharField(max_length=100, default="EN bonne état", help_text="Book remarks/condition during return")
 
     def __str__(self):
         return self.student.fullname + " borrowed " + self.book.book_title
